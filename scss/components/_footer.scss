@@ -1,0 +1,294 @@
+@use "../mixins";
+
+$color-primary: #1c355e;
+$color-white: #ffffff;
+
+.footer {
+  background-color: $color-primary;
+  color: $color-white;
+
+  // Franja de cuatro accesos
+  &__shortcuts {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  &__shortcuts-content {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 56px 40px;
+  }
+
+  &__shortcut {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    min-width: 0;
+
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &__icon {
+    display: block;
+    flex-shrink: 0;
+
+    width: 36px;
+    height: 36px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  // Marca y cuatro grupos
+  &__content {
+    display: grid;
+    grid-template-columns: 1.2fr repeat(4, minmax(0, 1fr));
+    gap: 40px;
+
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 76px 40px;
+  }
+
+  &__logo {
+    align-self: start;
+
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    white-space: nowrap;
+  }
+
+  &__group {
+    min-width: 0;
+  }
+
+  &__heading {
+    margin: 0 0 24px;
+  }
+
+  &__title {
+    display: block;
+
+    width: 100%;
+    padding: 0;
+    border: none;
+
+    background: transparent;
+    color: inherit;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 1.4;
+    text-align: left;
+
+    &:disabled {
+      opacity: 1;
+      color: inherit;
+      -webkit-text-fill-color: currentColor;
+      cursor: default;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__link {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  // Idioma, información legal y redes
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 28px;
+
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 40px 40px;
+  }
+
+  &__locale {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  &__legal {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    min-width: 0;
+
+    font-size: 10px;
+
+    small {
+      font-size: inherit;
+    }
+  }
+
+  &__social {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    font-size: 16px;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-width: 24px;
+      min-height: 24px;
+    }
+  }
+
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  a,
+  button {
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 4px;
+    }
+  }
+}
+
+// Distribución intermedia
+@media (min-width: 768px) and (max-width: 1100px) {
+  .footer {
+    &__content {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    &__logo {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+// Versión móvil
+@include mixins.mobile {
+  .footer {
+    &__shortcuts-content {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px 16px;
+
+      padding: 32px 20px;
+    }
+
+    &__shortcut {
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    &__icon {
+      width: 30px;
+      height: 30px;
+    }
+
+    &__content {
+      grid-template-columns: 1fr;
+      gap: 0;
+
+      padding: 36px 20px 16px;
+    }
+
+    &__logo {
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    &__group {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    &__group:nth-child(2) {
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    &__heading {
+      margin: 0;
+    }
+
+    &__title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 14px 0;
+
+      font-size: 18px;
+      cursor: pointer;
+
+      &::after {
+        content: "+";
+
+        font-family: Arial, sans-serif;
+        font-size: 22px;
+      }
+
+      &[aria-expanded="true"]::after {
+        content: "−";
+      }
+    }
+
+    &__list {
+      display: none;
+      gap: 12px;
+
+      padding-bottom: 20px;
+    }
+
+    // Muestra la lista del grupo que esté abierto
+    &__heading:has(.footer__title[aria-expanded="true"])
+      + .footer__list {
+      display: flex;
+    }
+
+    &__bottom {
+      flex-direction: column;
+      gap: 20px;
+
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    &__legal {
+      gap: 8px 12px;
+      font-size: 10px;
+    }
+  }
+}

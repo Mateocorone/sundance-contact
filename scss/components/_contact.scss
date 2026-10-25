@@ -1,0 +1,205 @@
+@use "../mixins";
+
+$color-primary: #1c355e;
+$color-background: #f7f5f2;
+$color-white: #ffffff;
+
+.contact {
+  background-color: $color-white;
+  color: $color-primary;
+
+  // Título y descripción sobre fondo claro
+  &__intro {
+    padding: 52px 24px;
+
+    background-color: $color-background;
+    text-align: center;
+  }
+
+  &__title {
+    margin: 0 0 20px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 48px;
+    font-weight: normal;
+    line-height: 1.15;
+  }
+
+  &__description {
+    max-width: 600px;
+    margin: 0 auto;
+
+    font-size: 15px;
+    line-height: 1.5;
+
+    a {
+      text-decoration: underline;
+
+      &:focus-visible {
+        outline: 2px solid $color-primary;
+        outline-offset: 3px;
+      }
+    }
+  }
+
+  // Formulario con dos columnas en escritorio
+  &__form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 20px;
+    row-gap: 20px;
+
+    width: calc(100% - 40px);
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 90px 0;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    min-width: 0;
+
+    &--full {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__label {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.4;
+  }
+
+  &__input {
+    display: block;
+
+    width: 100%;
+    min-width: 0;
+    height: 42px;
+    padding: 10px 12px;
+
+    border: 1px solid #6c7fa0;
+    border-radius: 3px;
+
+    background-color: $color-white;
+    color: $color-primary;
+
+    font-size: 14px;
+
+    &:focus-visible {
+      outline: 2px solid $color-primary;
+      outline-offset: 2px;
+    }
+
+    &--message {
+      height: 120px;
+      resize: vertical;
+    }
+  }
+
+  &__checkbox {
+    grid-column: 1 / -1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 13px;
+    cursor: pointer;
+
+    input {
+      flex-shrink: 0;
+
+      width: 16px;
+      height: 16px;
+      margin: 0;
+
+      accent-color: $color-primary;
+
+      &:focus-visible {
+        outline: 2px solid $color-primary;
+        outline-offset: 3px;
+      }
+    }
+  }
+
+  &__submit {
+    grid-column: 1 / -1;
+
+    width: 100%;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 999px;
+
+    background-color: $color-primary;
+    color: $color-white;
+
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #294b7b;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-primary;
+      outline-offset: 3px;
+    }
+  }
+
+  &__legal {
+    grid-column: 1 / -1;
+
+    margin: 0;
+
+    color: #706c69;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+
+    a {
+      text-decoration: underline;
+
+      &:focus-visible {
+        outline: 2px solid $color-primary;
+        outline-offset: 3px;
+      }
+    }
+  }
+}
+
+@include mixins.mobile {
+  .contact {
+    &__intro {
+      padding: 32px 20px;
+    }
+
+    &__title {
+      margin-bottom: 16px;
+      font-size: 36px;
+    }
+
+    &__description {
+      font-size: 14px;
+    }
+
+    // Todos los campos en una columna
+    &__form {
+      grid-template-columns: 1fr;
+      gap: 18px;
+
+      padding: 40px 0;
+    }
+
+    &__legal {
+      font-size: 11px;
+    }
+  }
+}

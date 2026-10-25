@@ -1,0 +1,196 @@
+@use "../mixins";
+
+$color-primary: #1c355e;
+$color-white: #ffffff;
+
+.header {
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+
+  padding: 18px 5%;
+  border-bottom: 1px solid #e8e4e0;
+
+  background-color: $color-white;
+  color: $color-primary;
+
+  &__logo {
+    flex-shrink: 0;
+
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    white-space: nowrap;
+  }
+
+  &__nav {
+    min-width: 0;
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    font-size: 13px;
+    font-weight: bold;
+    white-space: nowrap;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__button {
+    flex-shrink: 0;
+
+    padding: 8px 16px;
+    border-radius: 999px;
+
+    background-color: $color-primary;
+    color: $color-white;
+
+    font-size: 13px;
+    font-weight: bold;
+    white-space: nowrap;
+
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #294b7b;
+    }
+  }
+
+  &__toggle,
+  &__search {
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+    padding: 7px;
+    border: none;
+
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+    }
+  }
+
+  &__toggle {
+    display: none;
+  }
+
+  &__search {
+    display: flex;
+  }
+
+  a,
+  button {
+    &:focus-visible {
+      outline: 2px solid $color-primary;
+      outline-offset: 4px;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+  .header {
+    flex-wrap: wrap;
+    gap: 16px;
+
+    &__nav {
+      order: 1;
+      width: 100%;
+    }
+
+    &__list {
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px 24px;
+    }
+  }
+}
+
+@include mixins.mobile {
+  .header {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr) 36px;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 12px;
+
+    &__toggle {
+      display: flex;
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    &__logo {
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: center;
+
+      font-size: 18px;
+    }
+
+    &__search {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    &__button {
+      display: none;
+    }
+
+    &__nav {
+      display: none;
+
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 10;
+
+      width: 100%;
+      padding: 20px;
+      border-bottom: 1px solid #e8e4e0;
+
+      background-color: $color-white;
+    }
+
+    &__list {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    &__toggle[aria-expanded="true"] ~ .header__nav {
+      display: block;
+    }
+  }
+}
