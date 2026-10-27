@@ -1,5 +1,15 @@
 @use "../mixins";
 
+
+//npm.cmd install intalar dependecias
+//npx.cmd sass --watch scss/styles.scss:css/styles.css arrancar styles
+
+// cambio de colum grid-template-columns: repeat(2, minmax(0, 1fr));
+// mas ancho eme el form max-width: 600px;
+// mas espacios entre los camps  column-gap: 20px;
+//     row-gap: 20px;
+
+
 $color-primary: #1c355e;
 $color-background: #f7f5f2;
 $color-white: #ffffff;
